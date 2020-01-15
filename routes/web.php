@@ -13,9 +13,3 @@
 
 use App\User;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('test', function (Request $request) {
-    return User::all();
-});
