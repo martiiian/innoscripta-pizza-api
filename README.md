@@ -1,2 +1,1 @@
-# innoscripta-pizza-api
-Backend pizza app writing on Laravel
+## API for pizza innoscript app
