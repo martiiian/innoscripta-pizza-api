@@ -17,6 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::resources([
+    'ingredients' => 'IngredientController',
+]);
+
 Route::get('/test', function(Response $response) {
     return [
         'biba' => 'biba'
