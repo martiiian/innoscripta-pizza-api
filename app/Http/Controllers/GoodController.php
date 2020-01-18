@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\SizeResource;
-use App\Size;
+use App\Good;
+use App\Http\Resources\GoodCollection;
+use App\Http\Resources\GoodResource;
 use Illuminate\Http\Request;
 
-class SizeController extends Controller
+class GoodController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        return SizeResource::collection(Size::all());
+        return GoodResource::collection(Good::all());
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -41,13 +42,14 @@ class SizeController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return SizeResource|array
+     * @return GoodResource|array
      */
     public function show($id)
     {
-        $size = Size::find($id);
-        return $size->count() > 0
-            ? new SizeResource($size)
+        $good = Good::find($id);
+
+        return $good->count() > 0
+            ? new GoodResource($good)
             : [];
     }
 
