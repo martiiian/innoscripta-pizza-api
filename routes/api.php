@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resources([
     'ingredients' => 'IngredientController',
     'sizes' => 'SizeController',
+    'goods' => 'GoodController',
 ]);
 
 Route::get('/test', function(Response $response) {
