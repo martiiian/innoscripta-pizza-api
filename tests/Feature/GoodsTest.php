@@ -30,7 +30,7 @@ class GoodsTest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => $this->structure
+                    $this->structure
                 ]
             ]);
     }

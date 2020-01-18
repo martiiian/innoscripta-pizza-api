@@ -1,15 +1,22 @@
 <?php
 
 use Tests\TestCase;
+use App\Size;
 
 class SizesTest extends TestCase
 {
+
+    public $structure = [
+        'name',
+        'code'
+    ];
+
     /**
      * A basic functional test example.
      *
      * @return void
      */
-    public function test_ingredients_list()
+    public function test_sizes_list()
     {
         $response = $this->json('get', '/api/sizes');
 
@@ -17,10 +24,7 @@ class SizesTest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    [
-                        'name',
-                        'code'
-                    ]
+                    $this->structure
                 ]
             ]);
     }
@@ -30,18 +34,15 @@ class SizesTest extends TestCase
      *
      * @return void
      */
-    public function test_find_ingredient()
+    public function test_find_size()
     {
-        $id = \App\Size::first()->id;
-        $response = $this->json('get', "/api/sizes/$id");
+        $size_id = Size::first()->id;
+        $response = $this->json('get', "/api/sizes/$size_id");
 
         $response
             ->assertStatus(200)
             ->assertJsonStructure([
-                'data' => [
-                    'name',
-                    'code'
-                ]
+                'data' => $this->structure
             ]);
     }
 }
