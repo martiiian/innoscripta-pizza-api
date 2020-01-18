@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\IngredientCollection;
 use App\Ingredient;
 use Illuminate\Http\Request;
+use App\Http\Resources\Ingredient as IngredientResource;
 
 class IngredientController extends Controller
 {
@@ -13,7 +13,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        return new IngredientCollection(Ingredient::all());
+        return IngredientResource::collection(Ingredient::all());
     }
 
     /**
@@ -46,7 +46,7 @@ class IngredientController extends Controller
         $ingredient = Ingredient::find($id);
 
         return $ingredient->count() > 0
-            ? new \App\Http\Resources\Ingredient($ingredient)
+            ? new IngredientResource($ingredient)
             : [];
     }
 

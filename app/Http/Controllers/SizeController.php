@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\SizeCollection;
 use App\Http\Resources\SizeResource;
 use App\Size;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return SizeCollection
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        return new SizeCollection(Size::all());
+        return SizeResource::collection(Size::all());
     }
 
     /**
