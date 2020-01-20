@@ -20,7 +20,7 @@ class GoodResource extends JsonResource
             'description' => $this->description,
             'is_visible' => $this->is_visible,
             'image_name' => $this->image_name,
-            'sizes' => [],
+            'sizes' => SizeResource::collection($this->sizes),
             'ingredients' => []
         ];
     }
