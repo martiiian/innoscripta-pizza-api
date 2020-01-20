@@ -16,12 +16,19 @@ class GoodsSizesSeeder extends Seeder
     {
         $goods = Good::all();
         $sizes = Size::all();
+        $prices = [
+            'small' => 130,
+            'middle' => 200,
+            'big' => 300
+        ];
         $goodsSizesArr = [];
         foreach ($goods as $good) {
+            $coeficient = rand(1, 2);
             foreach ($sizes as $size) {
                 $goodsSizesArr[] = [
                     'size_id' => $size->id,
-                    'good_id' => $good->id
+                    'good_id' => $good->id,
+                    'price' => $prices[$size->code] * $coeficient
                 ];
             }
         }

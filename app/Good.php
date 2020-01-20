@@ -15,6 +15,11 @@ class Good extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany('App\Size', 'goods_sizes', 'good_id', 'size_id');
+        return $this->belongsToMany(
+            'App\Size',
+            'goods_sizes',
+            'good_id',
+            'size_id'
+        )->withPivot('price');
     }
 }
