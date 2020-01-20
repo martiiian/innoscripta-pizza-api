@@ -19,7 +19,8 @@ class GoodsTest extends TestCase
             [
                 'id',
                 'name',
-                'code'
+                'code',
+                'price'
             ]
         ]
     ];
