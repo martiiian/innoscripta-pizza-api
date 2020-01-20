@@ -9,6 +9,7 @@ use App\Good;
 class GoodsTest extends TestCase
 {
     public $structure = [
+        'id',
         'name',
         'description',
         'is_visible',

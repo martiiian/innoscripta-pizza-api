@@ -15,6 +15,7 @@ class GoodResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'is_visible' => $this->is_visible,
