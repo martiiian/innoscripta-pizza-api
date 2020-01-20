@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Good;
-use App\Http\Resources\GoodCollection;
 use App\Http\Resources\GoodResource;
 use Illuminate\Http\Request;
 
