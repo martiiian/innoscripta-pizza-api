@@ -15,7 +15,13 @@ class GoodsTest extends TestCase
         'is_visible',
         'image_name',
         'ingredients',
-        'sizes'
+        'sizes' => [
+            [
+                'id',
+                'name',
+                'code'
+            ]
+        ]
     ];
 
     /**
