@@ -7,6 +7,7 @@ class SizesTest extends TestCase
 {
 
     public $structure = [
+        'id',
         'name',
         'code'
     ];

@@ -7,6 +7,7 @@ class IngredientsTest extends TestCase
 {
 
     public $structure = [
+        'id',
         'name'
     ];
 
