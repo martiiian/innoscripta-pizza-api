@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Good;
 use App\Order;
+use App\Size;
 use App\User;
 use Tests\TestCase;
 
@@ -16,8 +18,39 @@ class OrderTest extends TestCase
         'phone',
         'delivery_price',
         'created_at',
-        'goods'
+        'goods' => [
+            '*' => [
+                'name',
+                'size',
+                'size_price',
+                'count'
+            ]
+        ]
     ];
+
+    /**
+     * @return array
+     * [
+     *  [
+     *   'productId' => int,
+     *   'count' => int,
+     *   'sizeId' => int
+     *  ]
+     * ]
+     */
+    public function getGoodsForCreateOrder() {
+        $goods = Good::take(3)->get();
+        $size = Size::where('code', 'small')->first();
+        $data = [];
+        foreach ($goods as $good) {
+            $data[] = [
+                'productId' => $good->id,
+                'count' => 2,
+                'sizeId' => $size->id
+            ];
+        }
+        return $data;
+    }
 
     public function test_list()
     {
@@ -64,6 +97,7 @@ class OrderTest extends TestCase
             ->state('for_request')
             ->make()
             ->toArray()[0];
+        $order['goods'] = $this->getGoodsForCreateOrder();
         $response = $this->json('POST', '/api/orders', $order);
         $response
             ->assertStatus(201)

@@ -35,4 +35,9 @@ class Order extends Model
     {
         return $this->hasOne('App\Users');
     }
+
+    public function goods()
+    {
+        return $this->hasMany('App\OrderGoods');
+    }
 }

@@ -13,7 +13,7 @@ class OrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,11 +28,11 @@ class OrderRequest extends FormRequest
             'city' => 'required|max:200',
             'phone' => 'required',
             'email' => 'email',
-//
-//            'goods' => 'required|array',
-//            'goods.*.productId' => 'required|integer',
-//            'goods.*.count' => 'required|integer',
-//            'goods.*.sizeId' => 'required|integer'
+
+            'goods' => 'required|array',
+            'goods.*.productId' => 'required|integer',
+            'goods.*.count' => 'required|integer',
+            'goods.*.sizeId' => 'required|integer'
         ];
     }
 }
