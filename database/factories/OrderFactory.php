@@ -17,3 +17,12 @@ $factory->define(Order::class, function (Faker $faker) {
         'user_id' => $user_id
     ];
 });
+
+$factory->state(Order::class, 'for_request', function (Faker $faker) {
+    return [
+        'city' => $faker->text(50),
+        'delivery_price' => null,
+        'user_id' => null,
+        'address' => $faker->text(200)
+    ];
+});
