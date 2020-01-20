@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -45,17 +46,20 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return OrderResource
+     * @throws \JsonException
      */
     public function store(Request $request)
     {
-        // temporary before add creating user
-        $data = [
-            'user_id' => 1
-        ];
-        $order = Order::store(array_merge($request->all(), $data));
-        return new OrderResource($order);
+        try {
+            $data = $request->all();
+            $data['user_id'] = User::store($data)->id;
+            $order = Order::store(array_merge($request->all(), $data));
+            return new OrderResource($order);
+        } catch (\Exception $e) {
+            throw new \JsonException('bad request');
+        }
     }
 
     /**
