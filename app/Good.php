@@ -12,4 +12,9 @@ class Good extends Model
         'is_visible',
         'image_name'
     ];
+
+    public function sizes()
+    {
+        return $this->belongsToMany('App\Size', 'goods_sizes', 'good_id', 'size_id');
+    }
 }
