@@ -21,10 +21,9 @@ Route::resources([
     'ingredients' => 'IngredientController',
     'sizes' => 'SizeController',
     'goods' => 'GoodController',
+    'orders' => 'OrderController'
 ]);
 
-Route::get('/test', function(Response $response) {
-    return [
-        'biba' => 'biba'
-    ];
-});
+// only for auth user
+Route::get('/orders/user/{id}', 'OrderController@indexUserId')
+    ->where('id', '[0-9]+');
