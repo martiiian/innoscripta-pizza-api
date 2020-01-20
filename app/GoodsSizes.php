@@ -8,6 +8,7 @@ class GoodsSizes extends Model
 {
     protected $fillable = [
         'good_id',
-        'size_id'
+        'size_id',
+        'price'
     ];
 }
