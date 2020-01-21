@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class OrderGoods extends Model
 {
@@ -29,5 +30,7 @@ class OrderGoods extends Model
                 'order_id' => $order_id
             ];
         }
+
+        DB::table('order_goods')->insert($data);
     }
 }
