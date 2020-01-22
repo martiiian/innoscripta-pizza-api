@@ -14,7 +14,12 @@ class GoodsTest extends TestCase
         'description',
         'is_visible',
         'image_name',
-        'ingredients',
+        'ingredients' => [
+            [
+                'id',
+                'name'
+            ]
+        ],
         'sizes' => [
             [
                 'id',

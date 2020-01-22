@@ -19,7 +19,7 @@ class OrderTest extends TestCase
         'delivery_price',
         'created_at',
         'goods' => [
-            '*' => [
+            [
                 'name',
                 'size',
                 'size_price',
