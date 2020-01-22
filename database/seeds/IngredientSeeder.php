@@ -6,16 +6,16 @@ class IngredientSeeder extends Seeder
 {
 
     public $ingredients = [
-        'фета',
-        'пармезан',
-        'чеддер',
-        'копченый сыр',
-        'сулугуни',
-        'дор блю',
-        'эменталлер',
-        'мягкий сыр',
-        'смесь прованских трав',
-        'моцарелла, соус'
+        'Feta',
+        'Parmesan',
+        'Cheddar',
+        'Smoked cheese',
+        'Suluguni',
+        'Dor Blue',
+        'Ementaller',
+        'Soft cheese',
+        'A mixture of provence herbs',
+        'Mozzarella sauce'
     ];
 
     public $index = 0;
