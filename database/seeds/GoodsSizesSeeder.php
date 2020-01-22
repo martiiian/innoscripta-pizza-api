@@ -17,9 +17,9 @@ class GoodsSizesSeeder extends Seeder
         $goods = Good::all();
         $sizes = Size::all();
         $prices = [
-            'small' => 130,
-            'middle' => 200,
-            'big' => 300
+            'small' => 3,
+            'middle' => 4,
+            'big' => 5
         ];
         $goodsSizesArr = [];
         foreach ($goods as $good) {
