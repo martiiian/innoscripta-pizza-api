@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SizeSeeder::class,
             GoodSeeder::class,
             GoodsSizesSeeder::class,
+            GoodsIngredientsSeeder::class,
             OrderSeeder::class
         ]);
     }
