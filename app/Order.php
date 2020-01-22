@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected static $delivery_price = 200;
+    protected static $delivery_price = 3;
 
     protected $fillable = [
         'name',
