@@ -4,6 +4,22 @@ use Illuminate\Database\Seeder;
 
 class IngredientSeeder extends Seeder
 {
+
+    public $ingredients = [
+        'фета',
+        'пармезан',
+        'чеддер',
+        'копченый сыр',
+        'сулугуни',
+        'дор блю',
+        'эменталлер',
+        'мягкий сыр',
+        'смесь прованских трав',
+        'моцарелла, соус'
+    ];
+
+    public $index = 0;
+
     /**
      * Seed the application's database.
      *
@@ -11,6 +27,12 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Ingredient::class, 3)->create();
+        factory(App\Ingredient::class, count($this->ingredients))
+            ->create()
+            ->each(function ($ingredient) {
+                $ingredient->name = $this->ingredients[$this->index];
+                $ingredient->save();
+                $this->index++;
+            });
     }
 }
