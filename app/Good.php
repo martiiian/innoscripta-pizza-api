@@ -22,4 +22,14 @@ class Good extends Model
             'size_id'
         )->withPivot('price');
     }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(
+            'App\Ingredient',
+            'goods_ingredients',
+            'good_id',
+            'ingredient_id'
+        );
+    }
 }
