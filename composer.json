@@ -8,12 +8,13 @@
     ],
     "license": "MIT",
     "require": {
+        "tymon/jwt-auth": "1.0.0-rc.5.1",
         "php": "^7.2",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "fzaninotto/faker": ">=1.4 <2.0.0",
-        "laravel/framework": "^6.2",
+        "laravel/framework": "^6.11",
         "laravel/tinker": "^2.0"
     },
     "require-dev": {

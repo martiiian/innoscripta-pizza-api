@@ -6,11 +6,14 @@ use App\Good;
 use App\Order;
 use App\Size;
 use App\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Tests\TestCase;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class OrderTest extends TestCase
 {
+    public $user = null;
     public $structure = [
         'id',
         'name',
@@ -27,6 +30,14 @@ class OrderTest extends TestCase
             ]
         ]
     ];
+
+    public function actingAs(Authenticatable $user, $driver = null)
+    {
+        $token = JWTAuth::fromUser($user);
+        $this->withHeader('Authorization', 'Bearer ' . $token);
+
+        return $this;
+    }
 
     /**
      * @return array
@@ -67,8 +78,10 @@ class OrderTest extends TestCase
 
     public function test_find_by_user_id()
     {
-        $user_id = User::first()->id;
-        $response = $this->json('get', "/api/orders/user/$user_id");
+        $user = User::first();
+
+        $response = $this->actingAs($user)
+            ->json('get', "/api/orders/user/{$user->id}");
 
         $response
             ->assertStatus(200)
