@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +14,30 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::resources([
     'ingredients' => 'IngredientController',
     'sizes' => 'SizeController',
     'goods' => 'GoodController',
     'orders' => 'OrderController'
 ]);
+Route::group([
+    'middleware' => 'auth:api',
+], function ($router) {
+    Route::get('/orders/user/{id}', 'OrderController@indexUserId')
+        ->where('id', '[0-9]+');
+});
 
-// only for auth user
-Route::get('/orders/user/{id}', 'OrderController@indexUserId')
-    ->where('id', '[0-9]+');
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth',
+], function ($router) {
+    Route::post('/login', 'AuthController@login');
+
+    Route::group([
+        'middleware' => 'auth:api'
+    ], function ($router) {
+        Route::post('/logout', 'AuthController@logout');
+        Route::post('/refresh', 'AuthController@refresh');
+        Route::post('/me', 'AuthController@me');
+    });
+});
