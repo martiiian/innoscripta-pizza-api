@@ -81,7 +81,7 @@ class OrderTest extends TestCase
         $user = User::first();
 
         $response = $this->actingAs($user)
-            ->json('get', "/api/orders/user/{$user->id}");
+            ->json('get', "/api/orders/user");
 
         $response
             ->assertStatus(200)
