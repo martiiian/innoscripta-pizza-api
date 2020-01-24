@@ -72,7 +72,7 @@ class AuthController extends Controller
 
     public function me()
     {
-        return Auth::user();
+        return [ 'data' => Auth::user() ];
     }
 
     /**
