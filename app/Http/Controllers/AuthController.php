@@ -6,6 +6,7 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -71,7 +72,7 @@ class AuthController extends Controller
 
     public function me()
     {
-        return new UserResource(auth()->user());
+        return Auth::user();
     }
 
     /**
