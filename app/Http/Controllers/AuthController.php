@@ -72,7 +72,11 @@ class AuthController extends Controller
 
     public function me()
     {
-        return [ 'data' => Auth::user() ];
+        try {
+            return [ 'data' => Auth::user() ];
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     /**
