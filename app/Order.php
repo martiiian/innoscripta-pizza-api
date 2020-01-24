@@ -25,7 +25,7 @@ class Order extends Model
             'phone' => $data['phone'],
             'address' => $data['address'],
             'delivery_price' => self::$delivery_price,
-            'user_id' => $data['user_id']
+            'user_id' => auth()->id() ?? null
         ]);
         $newOrder->save();
         return $newOrder;
