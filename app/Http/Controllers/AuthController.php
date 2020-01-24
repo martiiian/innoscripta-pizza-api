@@ -2,11 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
 use App\Http\Resources\UserResource;
+use App\User;
 use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
+    /**
+     * Get a JWT via given credentials
+     *
+     * @param UserCreateRequest $request
+     * @return JsonResponse
+     */
+    public function registration(UserCreateRequest $request)
+    {
+        $credentials = request()->all(['phone', 'password']);
+
+        if ($token = auth()->attempt($credentials)) {
+            return $this->respondWithToken($token);
+        }
+        if (User::where('phone', $credentials['phone'])->count() > 0) {
+            return response()->json([
+                'errors' => [
+                    'wrong' => 'Already exist'
+                ]
+            ], 401);
+        }
+
+        $user = User::store($request->all());
+        auth()->login($user);
+
+        $token = auth()->attempt($credentials);
+        return $this->respondWithToken($token);
+    }
+
     /**
      * Get a JWT via given credentials
      *
@@ -17,7 +47,11 @@ class AuthController extends Controller
         $credentials = request(['phone', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json([
+                'errors' => [
+                    'wrong' => 'Wrong combination'
+                ]
+            ], 401);
         }
 
         return $this->respondWithToken($token);
