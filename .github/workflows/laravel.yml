@@ -20,5 +20,7 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit --coverage-clover ./coverage.xml
     - name: Send coverage to codacy
+      env:
+        CODACY_PROJECT_TOKEN: 734462c3de8f4e139e9c223a88cb9a7c
       run: vendor/bin/codacycoverage clover ./coverage.xml
 
