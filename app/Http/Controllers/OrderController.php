@@ -25,12 +25,11 @@ class OrderController extends Controller
     /**
      * Get orders by user id
      *
-     * @param int $user_id
      * @return AnonymousResourceCollection
      */
-    public function indexUserId(int $user_id)
+    public function indexUser()
     {
-        $orders = Order::where('user_id', $user_id)->get();
+        $orders = Order::where('user_id', auth()->id())->get();
         return OrderResource::collection($orders);
     }
 

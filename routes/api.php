@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group([
+    'middleware' => 'auth:api',
+], function ($router) {
+    Route::get('/orders/user', 'OrderController@indexUser');
+});
 
 Route::resources([
     'ingredients' => 'IngredientController',
@@ -20,18 +25,13 @@ Route::resources([
     'goods' => 'GoodController',
     'orders' => 'OrderController'
 ]);
-Route::group([
-    'middleware' => 'auth:api',
-], function ($router) {
-    Route::get('/orders/user/{id}', 'OrderController@indexUserId')
-        ->where('id', '[0-9]+');
-});
 
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth',
 ], function ($router) {
     Route::post('/login', 'AuthController@login');
+    Route::post('/registration', 'AuthController@registration');
 
     Route::group([
         'middleware' => 'auth:api'
