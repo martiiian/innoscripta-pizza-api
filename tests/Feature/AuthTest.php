@@ -52,6 +52,66 @@ class AuthTest extends TestCase
             ->assertJsonStructure($this->successFormat);
     }
 
+    public function test_logout()
+    {
+        $loginResponse = $this->successLogin();
+
+        $response = $this->json('post', '/api/auth/logout', [], [
+            'Authorization' => "Bearer {$loginResponse->getOriginalContent()['access_token']}"
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(['message']);
+    }
+
+    public function test_success_registration()
+    {
+        $userData = [
+            'name' => 'Biba',
+            'password' => 'somepassword',
+            'phone' => '89666666666'
+        ];
+
+        $response = $this->json('post', '/api/auth/registration', $userData);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure($this->successFormat);
+
+        User::where('name', 'Biba')->delete();
+    }
+
+    public function test_exist_user_registration()
+    {
+        $user = $this->getUser();
+
+        $response = $this->json('post', '/api/auth/registration', [
+            'name' => $user->name,
+            'phone' => $user->phone,
+            'password' => 'somewrongpass'
+        ]);
+
+        $response->assertStatus(401)
+            ->assertJsonStructure([
+                'errors' => [
+                    'wrong'
+                ]
+            ]);
+    }
+
+    public function test_login_when_registration_with_right_creditionals()
+    {
+        $user = $this->getUser();
+
+        $response = $this->json('post', '/api/auth/registration', [
+            'name' => $user->name,
+            'phone' => $user->phone,
+            'password' => 'password'
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure($this->successFormat);
+    }
+
     public function test_refresh_token()
     {
         $loginResponse = $this->successLogin();

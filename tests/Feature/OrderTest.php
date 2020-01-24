@@ -63,6 +63,19 @@ class OrderTest extends TestCase
         return $data;
     }
 
+    public function getBadGoodsForCreateOrder() {
+        $goods = Good::take(3)->get();
+        $data = [];
+        foreach ($goods as $good) {
+            $data[] = [
+                'productId' => 0,
+                'count' => 0,
+                'sizeId' => 0
+            ];
+        }
+        return $data;
+    }
+
     public function test_list()
     {
         $response = $this->json('get', '/api/orders');
@@ -117,5 +130,16 @@ class OrderTest extends TestCase
             ->assertJsonStructure([
                 'data' => $this->structure
             ]);
+    }
+
+    public function test_fail_create()
+    {
+        $order = factory(Order::class, 1)
+            ->state('for_request')
+            ->make()
+            ->toArray()[0];
+        $order['goods'] = $this->getBadGoodsForCreateOrder();
+        $response = $this->json('POST', '/api/orders', $order);
+        $response->assertStatus(420);
     }
 }
