@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "tymon/jwt-auth": "1.0.0-rc.5.1",
+        "tymon/jwt-auth": "1.0.0",
         "php": "^7.2",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
